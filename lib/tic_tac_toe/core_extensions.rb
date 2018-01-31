@@ -1,8 +1,6 @@
-# NOT PART OF MODULE BECAUSE IT EXTENDS CORE RUBY
-
 class Array
   def all_empty?
-    self.all? { |element| element.to_s.empty? }
+    self.all? { |element| element.include?("/1-9/") }
   end
 
   def all_same?
@@ -17,4 +15,5 @@ class Array
   def none_empty?
     !self.any_empty?
   end
+
 end

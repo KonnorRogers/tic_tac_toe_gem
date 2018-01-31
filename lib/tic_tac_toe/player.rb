@@ -1,4 +1,3 @@
-
 module TicTacToe
   class Player
     attr_reader :color, :name

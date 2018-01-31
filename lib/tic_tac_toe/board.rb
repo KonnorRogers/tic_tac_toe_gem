@@ -4,6 +4,8 @@ module TicTacToe
     #if no input given ,creates an empty hash for grid
     def initialize(input = {})
       @grid = input.fetch(:grid, default_grid)
+      set_default_grid
+
     end
 
     def get_cell(x, y)
@@ -21,7 +23,7 @@ module TicTacToe
     end
 
     def draw?
-      grid.flatten.map { |cell| cell.value }.none_empty?
+      grid.flatten.map { |cell| cell.value }.all_empty?
       # #flatten turns the grid to a 1d array,
       # #map creates a new Array
       #the block then maps the values to the new Array
@@ -29,20 +31,31 @@ module TicTacToe
     end
 
     def formatted_grid
+      i = 0
       grid.each do |row|
-        puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")
+        puts row.map { |cell| cell.value }.join(" | ")
+        puts "----------" if i < 2
+        i += 1
       end
+    end
+
+    def set_default_grid
+      set_cell(0, 0, "7")
+      set_cell(1, 0, "8")
+      set_cell(2, 0, "9")
+      set_cell(0, 1, "4")
+      set_cell(1, 1, "5")
+      set_cell(2, 1, "6")
+      set_cell(0, 2, "1")
+      set_cell(1, 2, "2")
+      set_cell(2, 2, "3")
     end
 
     private
 
     def default_grid
       Array.new(3) { Array.new(3) { Cell.new } }
-      # [
-      #   1[CELL1, CELL2, CELL3]
-      #   2[CELL1, CELL2, CELL3]
-      #   3[CELL1, CELL2, CELL3]
-      # ]
+
     end
 
     def winner?

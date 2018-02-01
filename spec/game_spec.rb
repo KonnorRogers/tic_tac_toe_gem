@@ -58,11 +58,19 @@ module TicTacToe
         game = Game.new([bob, frank])
         expect(game.get_move("7")).to eq [0, 0]
       end
+    end
 
-      # it "returns no method error w/ improper input" do
-      #   game = Game.new([bob, frank])
-      #   expect{game.get_move("hello")}.to raise_error(NoMethodError)
-      # end
+    context "#sanitize_input" do
+      it "returns false if a number between 1-9 not given" do
+        game = Game.new([bob, frank])
+        expect(game.sanitize_input("hello")).to eq false
+      end
+
+      it "returns false if a coordinate is already taken" do
+        game = Game.new([bob, frank])
+        game.board.get_cell(0,2).value = "X"
+        expect(game.sanitize_input("1")).to eq false
+      end
     end
 
     context "#game_over" do

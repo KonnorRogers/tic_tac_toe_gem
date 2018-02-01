@@ -17,29 +17,28 @@ module TicTacToe
     end
 
     def get_move(human_move = gets.chomp)
-      # return human_move_to_coordinate(human_move) if ((1..9).include?(human_move.to_i))
-      # puts "Improper input, please enter a number between 1-9"
-
-      sanitize_input(human_move)
-      
-      #utilizes recursion to get input
+      if (sanitize_input(human_move) != false)
+        return sanitize_input(human_move)
+      else
+        get_move
+      end
     end
 
     def sanitize_input(input)
       if !((1..9).include?(input.to_i))
         puts "Improper input, please enter a number between 1-9"
-        get_move
+        return false
       end
 
       first = human_move_to_coordinate(input)[0]
       second = human_move_to_coordinate(input)[1]
 
       cell_value = board.get_cell(first, second).value
-      puts cell_value
+      # puts cell_values
 
       if cell_value == "X" || cell_value == "Y"
         puts "Coordinate already taken"
-        get_move
+        return false
       else
         human_move_to_coordinate(input)
       end

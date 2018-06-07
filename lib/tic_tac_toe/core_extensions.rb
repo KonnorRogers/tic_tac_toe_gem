@@ -1,6 +1,6 @@
 class Array
   def all_empty?
-    self.all? { |element| element.include?("/1-9/") }
+    self.all? { |element| element.to_s.empty? }
   end
 
   def all_same?
@@ -8,7 +8,7 @@ class Array
   end
 
   def any_empty?
-    return true if self.empty?
+    return true if empty?
     self.any? { |element| element.to_s.empty? }
   end
 

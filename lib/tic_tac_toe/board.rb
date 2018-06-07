@@ -3,8 +3,8 @@ module TicTacToe
     attr_reader :grid
     #if no input given ,creates an empty hash for grid
     def initialize(input = {})
-      @grid = input.fetch(:grid, default_grid)
-      set_default_grid
+      @grid = input.fetch(:grid, default_grid) # default value
+      # set_default_grid
 
     end
 
@@ -23,7 +23,7 @@ module TicTacToe
     end
 
     def draw?
-      grid.flatten.map { |cell| cell.value }.all_empty?
+      grid.flatten.map {  |cell| cell.value }.none_empty?
       # #flatten turns the grid to a 1d array,
       # #map creates a new Array
       #the block then maps the values to the new Array
@@ -33,10 +33,11 @@ module TicTacToe
     def formatted_grid
       i = 0
       grid.each do |row|
-        puts row.map { |cell| cell.value }.join(" | ")
-        puts "----------" if i < 2
+        print row.map { |cell| cell.value }.join(" | ")
+        print "\n----------\n" if i < 2
         i += 1
       end
+
     end
 
     def set_default_grid

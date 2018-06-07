@@ -1,11 +1,10 @@
 module TicTacToe
   class Board
     attr_reader :grid
-    #if no input given ,creates an empty hash for grid
+    # if no input given ,creates an empty hash for grid
     def initialize(input = {})
       @grid = input.fetch(:grid, default_grid) # default value
       # set_default_grid
-
     end
 
     def get_cell(x, y)
@@ -23,40 +22,38 @@ module TicTacToe
     end
 
     def draw?
-      grid.flatten.map {  |cell| cell.value }.none_empty?
+      grid.flatten.map(&:value).none_empty?
       # #flatten turns the grid to a 1d array,
       # #map creates a new Array
-      #the block then maps the values to the new Array
+      # the block then maps the values to the new Array
       # checks if the every element of the new Array is not empty
     end
 
     def formatted_grid
       i = 0
       grid.each do |row|
-        print row.map { |cell| cell.value }.join(" | ")
+        print row.map(&:value).join(' | ')
         print "\n----------\n" if i < 2
         i += 1
       end
-
     end
 
     def set_default_grid
-      set_cell(0, 0, "7")
-      set_cell(1, 0, "8")
-      set_cell(2, 0, "9")
-      set_cell(0, 1, "4")
-      set_cell(1, 1, "5")
-      set_cell(2, 1, "6")
-      set_cell(0, 2, "1")
-      set_cell(1, 2, "2")
-      set_cell(2, 2, "3")
+      set_cell(0, 0, '7')
+      set_cell(1, 0, '8')
+      set_cell(2, 0, '9')
+      set_cell(0, 1, '4')
+      set_cell(1, 1, '5')
+      set_cell(2, 1, '6')
+      set_cell(0, 2, '1')
+      set_cell(1, 2, '2')
+      set_cell(2, 2, '3')
     end
 
     private
 
     def default_grid
       Array.new(3) { Array.new(3) { Cell.new } }
-
     end
 
     def winner?
@@ -68,15 +65,15 @@ module TicTacToe
     end
 
     def winning_position_values(winning_position)
-      winning_position.map { |cell| cell.value }
+      winning_position.map(&:value)
     end
 
     def winning_positions
-      grid + #rows
-      grid.transpose + #columns
-      # a = [[1,2], [3,4], [5,6]]
-      # a.transpose   #=> [[1, 3, 5], [2, 4, 6]]
-      diagonals # two diagonals
+      grid + # rows
+        grid.transpose + # columns
+        # a = [[1,2], [3,4], [5,6]]
+        # a.transpose   #=> [[1, 3, 5], [2, 4, 6]]
+        diagonals # two diagonals
 
       # EXPLANATION
       # GRID RETURNS THE GRID, GRID.TRANSPOSE RETURNS THE ARRAY SEPERATED TO columns
@@ -94,8 +91,7 @@ module TicTacToe
       # =>  [(0,0), (1,0), (2,0)]
       # => [(0,1), (1,1), (2,1)]
       # => [(0,2), (2,1), (2,2)]
-      #]
+      # ]
     end
-
   end
 end
